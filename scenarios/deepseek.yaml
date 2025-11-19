@@ -1,5 +1,5 @@
 apiVersion: ai.sap.com/v1alpha1
-kind: ServingTemplate
+kind: WorkflowTemplate
 metadata:
   name: deepseek-pipeline
   annotations:
