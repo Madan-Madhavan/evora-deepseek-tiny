@@ -13,7 +13,7 @@ spec:
       predictor:
         containers:
           - name: deepseek
-            image: madanmathvan/deepseek:latest
+            image: madanmathavan/deepseek:latest
             ports:
               - containerPort: 9001
             resources:
