@@ -1,0 +1,51 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: ServingTemplate
+metadata:
+  name: deepseek-serving-001         # unique identifier for this executable
+  annotations:
+    scenarios.ai.sap.com/description: "DeepSeek reasoning model – online inference"
+    scenarios.ai.sap.com/name: "DeepSeek Reasoner"
+    executables.ai.sap.com/description: "Serves DeepSeek model via REST API"
+    executables.ai.sap.com/name: "DeepSeek Serving"
+  labels:
+    scenarios.ai.sap.com/id: "deepseek-reasoner"
+    ai.sap.com/version: "1.0"
+spec:
+  inputs:
+    artifacts:
+      - name: deepseekmodel         # artifact placeholder referring to your model files
+    parameters:
+      - name: port
+        type: string
+  template:
+    apiVersion: "serving.kserve.io/v1beta1"
+    metadata:
+      annotations: |
+        autoscaling.knative.dev/metric: concurrency
+        autoscaling.knative.dev/target: 1
+        autoscaling.knative.dev/targetBurstCapacity: 0
+      labels: |
+        ai.sap.com/resourcePlan: starter
+    spec: |
+      predictor:
+        imagePullSecrets:
+          - name: your-docker-secret    # if needed; remove if public image
+        minReplicas: 1
+        maxReplicas: 3
+        containers:
+        - name: deepseek-container
+          image: "madanmathavan/deepseek:latest"
+          ports:
+            - containerPort: 9001
+              protocol: TCP
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              set -e && \
+              echo "Starting DeepSeek Serving..." && \
+              python /app/app.py
+          env:
+            - name: MODEL_PATH
+              value: "{{inputs.artifacts.deepseekmodel}}"
+            - name: PORT
+              value: "{{inputs.parameters.port}}"
