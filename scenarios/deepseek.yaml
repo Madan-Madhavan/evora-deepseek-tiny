@@ -6,13 +6,11 @@ metadata:
     scenarios.ai.sap.com/description: "DeepSeek reasoning model"
     scenarios.ai.sap.com/name: "DeepSeek Reasoner"
     executables.ai.sap.com/description: "Runs DeepSeek inference on prompts"
-    executables.ai.sap.com/name: "DeepSeek Inference"
+    executables.ai.sap.com.name: "DeepSeek Inference"
   labels:
     scenarios.ai.sap.com/id: "deepseek"
-    ai.sap.com/version: "1.0"
+    ai.sap.com.version: "1.0"
 spec:
-  imagePullSecrets:
-    - name: your-docker-secret # if your Docker image is private; else remove
   entrypoint: deepseek-entry
   templates:
     - name: deepseek-entry
@@ -23,9 +21,17 @@ spec:
     - name: deepseek-container
       container:
         image: madanmathvan/deepseek:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - "uvicorn app:app --host 0.0.0.0 --port 9001"
+        command: ["python", "-m", "uvicorn"]
+        args: ["app:app", "--host", "0.0.0.0", "--port", "9001"]
         env:
           - name: MODEL_PATH
             value: "/app/model/DeepSeek-R1-Distill-Qwen-1.5B-Q4_1.gguf"
+          - name: PORT
+            value: "9001"
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
