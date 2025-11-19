@@ -9,7 +9,7 @@ metadata:
     executables.ai.sap.com/name: "DeepSeek Inference"
   labels:
     scenarios.ai.sap.com/id: "deepseek"
-    ai.sap.com.version: "1.0"
+    ai.sap.com/version: "1.0"
 spec:
   entrypoint: deepseek-entry
   templates:
