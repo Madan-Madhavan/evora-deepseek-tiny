@@ -24,5 +24,5 @@ async def infer(payload: dict):
     return {"response": output["choices"][0]["text"]}
 
 if __name__ == "__main__":
-    # Listen on all interfaces so SAP AI Core can reach it
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 9001))  # default 9001
+    uvicorn.run(app, host="0.0.0.0", port=port)
