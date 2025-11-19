@@ -6,7 +6,7 @@ metadata:
     scenarios.ai.sap.com/description: "DeepSeek reasoning model"
     scenarios.ai.sap.com/name: "DeepSeek Reasoner"
     executables.ai.sap.com/description: "Runs DeepSeek inference on prompts"
-    executables.ai.sap.com.name: "DeepSeek Inference"
+    executables.ai.sap.com/name: "DeepSeek Inference"
   labels:
     scenarios.ai.sap.com/id: "deepseek"
     ai.sap.com.version: "1.0"
