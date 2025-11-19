@@ -13,7 +13,7 @@ spec:
       predictor:
         containers:
           - name: deepseek
-            image: <your-container-registry-image>    # you will fill this later
+            image: madanmathvan/deepseek:latest
             ports:
               - containerPort: 9001
             resources:
