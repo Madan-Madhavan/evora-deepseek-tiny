@@ -13,6 +13,8 @@ metadata:
     ai.sap.com/version: "1.0"
 spec:
   inputs:
+      artifacts:
+      - name: deepseekmodel
     parameters:
       - name: port
         type: string
