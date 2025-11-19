@@ -22,7 +22,8 @@ spec:
       container:
         image: madanmathavan/deepseek:latest
         command: ["python", "-m", "uvicorn"]
-        args: ["app:app", "--host", "0.0.0.0", "--port", "9001"]
+        args:
+        - "python /app/app.py"
         env:
           - name: MODEL_PATH
             value: "/app/model/DeepSeek-R1-Distill-Qwen-1.5B-Q4_1.gguf"
