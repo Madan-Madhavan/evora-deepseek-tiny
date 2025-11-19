@@ -20,7 +20,7 @@ spec:
 
     - name: deepseek-container
       container:
-        image: madanmathvan/deepseek:latest
+        image: madanmathavan/deepseek:latest
         command: ["python", "-m", "uvicorn"]
         args: ["app:app", "--host", "0.0.0.0", "--port", "9001"]
         env:
