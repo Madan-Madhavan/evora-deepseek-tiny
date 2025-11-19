@@ -3,7 +3,7 @@ kind: ServingTemplate
 metadata:
   name: deepseek-serving-001
   annotations:
-    scenarios.ai.sap.com/description: "DeepSeek reasoning model – online inference"
+    scenarios.ai.sap.com/description: "DeepSeek reasoning model for online inference"
     scenarios.ai.sap.com/name: "DeepSeek Reasoner"
     executables.ai.sap.com/description: "Runs DeepSeek inference on prompts"
     executables.ai.sap.com/name: "deepseek-serving"
@@ -42,4 +42,9 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - >
-              set -e && echo "Starting DeepSeek Serv
+              set -e && echo "Starting DeepSeek Serving..." && python /app/app.py
+          env:
+            - name: MODEL_PATH
+              value: "{{inputs.artifacts.deepseekmodel}}"
+            - name: PORT
+              value: "{{inputs.parameters.port}}"
