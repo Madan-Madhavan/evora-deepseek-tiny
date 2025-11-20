@@ -14,7 +14,7 @@ metadata:
 spec:
   inputs:
     artifacts:
-      - name: deepseek-tiny-r1
+      - name: deepseek-tiny_r1
     parameters:
       - name: port
         type: string
@@ -43,6 +43,6 @@ spec:
               set -e && echo "Starting DeepSeek Serving..." && python /app/app.py
           env:
             - name: MODEL_PATH
-              value: "{{inputs.artifacts.deepseek-tiny-r1}}"
+              value: "{{inputs.artifacts.deepseek-tiny_r1}}"
             - name: PORT
               value: "{{inputs.parameters.port}}"
