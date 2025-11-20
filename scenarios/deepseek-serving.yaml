@@ -11,7 +11,7 @@ metadata:
   labels:
     scenarios.ai.sap.com/id: "deepseek-reasoner"
     ai.sap.com/version: "1.0"
-spec:
+spec: |
   inputs:
     artifacts:
       - name: deepseekmodel
