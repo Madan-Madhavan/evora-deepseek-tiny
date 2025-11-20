@@ -43,6 +43,6 @@ spec:
               set -e && echo "Starting DeepSeek Serving..." && python /app/app.py
           env:
             - name: MODEL_PATH
-              value: "{{inputs.artifacts.deepseekmodel}}"
+              value: "{{inputs.artifacts.deepseekmodel.path}}"
             - name: PORT
               value: "{{inputs.parameters.port}}"
