@@ -11,7 +11,7 @@ metadata:
   labels:
     scenarios.ai.sap.com/id: "deepseek-reasoner"
     ai.sap.com/version: "1.0"
-spec:  # <-- must be OBJECT
+spec:  # ✅ Object, NOT string
   inputs:
     artifacts:
       - name: deepseekmodel
@@ -20,7 +20,7 @@ spec:  # <-- must be OBJECT
     parameters:
       - name: port
         type: string
-  template:  # <-- OBJECT
+  template:  # ✅ Object
     apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
@@ -29,7 +29,7 @@ spec:  # <-- must be OBJECT
         autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
         ai.sap.com/resourcePlan: starter
-    spec: |   # <-- STRING! This is correct
+    spec: |  # ✅ String, this inner spec is YAML literal
       predictor:
         minReplicas: 1
         maxReplicas: 3
