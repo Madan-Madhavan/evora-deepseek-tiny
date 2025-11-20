@@ -29,7 +29,7 @@ spec:
         autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
         ai.sap.com/resourcePlan: starter
-    spec: |
+    spec:
       predictor:
         minReplicas: 1
         maxReplicas: 3
