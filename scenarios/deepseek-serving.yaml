@@ -15,19 +15,16 @@ spec:
   inputs:
     artifacts:
       - name: deepseekmodel
-        type: model
-        uri: "https://github.com/Madan-Madhavan/evora-deepseek-tiny/releases/download/model-artifact/DeepSeek-R1-Distill-Qwen-1.5B-Q4_1.gguf"
     parameters:
       - name: port
         type: string
-        default: "9001"
   template:
-    apiVersion: serving.kserve.io/v1beta1
+    apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
         autoscaling.knative.dev/metric: concurrency
-        autoscaling.knative.dev/target: "1"
-        autoscaling.knative.dev/targetBurstCapacity: "0"
+        autoscaling.knative.dev/target: 1
+        autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
         ai.sap.com/resourcePlan: starter
     spec: |
@@ -35,16 +32,17 @@ spec:
         minReplicas: 1
         maxReplicas: 3
         containers:
-          - name: kserve-container
-            image: "madanmathavan/deepseek:latest"
-            ports:
-              - containerPort: 9001
-                protocol: TCP
-            command: ["/bin/sh","-c"]
-            args:
-              - set -e && echo "Starting DeepSeek Serving..." && python /app/app.py
-            env:
-              - name: MODEL_PATH
-                value: "{{inputs.artifacts.deepseekmodel.uri}}"
-              - name: PORT
-                value: "{{inputs.parameters.port}}"
+        - name: kserve-container
+          image: "madanmathavan/deepseek:latest"
+          ports:
+            - containerPort: 9001
+              protocol: TCP
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              set -e && echo "Starting DeepSeek Serving..." && python /app/app.py
+          env:
+            - name: MODEL_PATH
+              value: "{{inputs.artifacts.deepseekmodel}}"
+            - name: PORT
+              value: "{{inputs.parameters.port}}"
