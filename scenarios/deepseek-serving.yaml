@@ -14,7 +14,7 @@ metadata:
 spec:
   inputs:
     artifacts:
-      - name: DeepSeek-R1-Distill-Qwen-1.5B-Q4_1
+      - name: deepseek-tiny-r1
     parameters:
       - name: port
         type: string
