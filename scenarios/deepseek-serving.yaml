@@ -45,6 +45,6 @@ spec:
               set -e && echo "Starting DeepSeek Serving..." && python /app/app.py
           env:
             - name: MODEL_PATH
-              value: "{{inputs.artifacts.deepseekmodel.path}}"
+              value: "https://github.com/Madan-Madhavan/evora-deepseek-tiny/releases/download/model-artifact/DeepSeek-R1-Distill-Qwen-1.5B-Q4_1.gguf"
             - name: PORT
               value: "{{inputs.parameters.port}}"
